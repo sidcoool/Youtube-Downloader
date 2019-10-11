@@ -6,16 +6,28 @@ const app = express();
 const PORT = process.env.PORT || 3333
 
 app.get('/', (req, res)=>{
-	res.send("working !")
+	res.sendFile(__dirname + "/index.html")
 })
 
 app.get('/download/:url', (req,res) => {
-	//http://localhost:4000/download/url?a=https://www.youtube.com/watch?v=42QuXLucH3Q
+	//http://localhost:3333/download/url?a=https://www.youtube.com/watch?v=Kpn2ajSa92c
 	let URL = req.query.a;
-	res.header('Content-Disposition', 'attachment; filename="video.mp4"');
-	ytdl(URL, {
-		format: 'mp4'
-	}).pipe(res);
+	console.log(URL)
+
+	let videoID = URL.split("=")[1]
+	console.log(videoID)
+	ytdl.getInfo(videoID, (err, info) => {
+		if (err) throw err;
+		console.log(info.player_response.videoDetails.title)
+
+		res.header('Content-Disposition', `attachment; filename=${info.player_response.videoDetails.title}.mp4`);
+
+		ytdl(URL, {
+			format: 'mp4'
+		}).pipe(res);
+	  });
+
+
 });
 
 

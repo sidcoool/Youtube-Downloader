@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Youtube Downloader</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css">
+
+</head>
+<body>
+    <div class="container">
+        <div class="row p-2 mt-5">
+                <h3>Paste the link here</h3>
+            <input class="form-control m-1" type="text" id="link">
+            <input type="submit" value="Submit" class="btn btn-info m-1"
+             onclick="window.open(`/download/url?a=${document.getElementById('link').value}`)">
+        </div>
+    </div>
+</body>
+</html>
