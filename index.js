@@ -18,9 +18,9 @@ app.get('/download/:url', (req,res) => {
 	console.log(videoID)
 	ytdl.getInfo(videoID, (err, info) => {
 		if (err) throw err;
-		console.log(info.player_response.videoDetails.title)
+		console.log(info.player_response.videoDetails.title.replace(/ /g, "_"))
 
-		res.header('Content-Disposition', `attachment; filename=${info.player_response.videoDetails.title}.mp4`);
+		res.header('Content-Disposition', `attachment; filename=${info.player_response.videoDetails.title.replace(/ /g, "_").slice(0,20)}.mp4`);
 
 		ytdl(URL, {
 			format: 'mp4'
